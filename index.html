@@ -338,11 +338,11 @@ EXPORT  In Google Sheets → File → Download → Excel (.xlsx) anytime
 
 <script>
   // ── PASTE YOUR WEB APP URL HERE ──────────────────────
-  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz3XKbzOn0o-irgraawZZ3CYAfQ6Rj2EsegiZfuKWbSsLEeGTrT0jPWmfuORqj1124sxA/exec';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyTkYUy0AqUtwDEesQLwZXKxlJy9-bOZ-LmIezhr11wb1b2Jg7R_vlMcfEJAUvNNGqKhA/exec';
   // ─────────────────────────────────────────────────────
 
   // Hide setup banner if URL is configured
-  if (SHEET_URL !== 'https://script.google.com/macros/s/AKfycbz3XKbzOn0o-irgraawZZ3CYAfQ6Rj2EsegiZfuKWbSsLEeGTrT0jPWmfuORqj1124sxA/exec') {
+  if (SHEET_URL !== 'https://script.google.com/macros/s/AKfycbyTkYUy0AqUtwDEesQLwZXKxlJy9-bOZ-LmIezhr11wb1b2Jg7R_vlMcfEJAUvNNGqKhA/exec') {
     document.getElementById('setupBanner').style.display = 'none';
   }
 
@@ -457,7 +457,7 @@ EXPORT  In Google Sheets → File → Download → Excel (.xlsx) anytime
     btn.disabled = true; btn.classList.add('loading');
 
     try {
-      if (SHEET_URL && SHEET_URL !== 'https://script.google.com/macros/s/AKfycbz3XKbzOn0o-irgraawZZ3CYAfQ6Rj2EsegiZfuKWbSsLEeGTrT0jPWmfuORqj1124sxA/exec') {
+      if (SHEET_URL && SHEET_URL !== 'https://script.google.com/macros/s/AKfycbyTkYUy0AqUtwDEesQLwZXKxlJy9-bOZ-LmIezhr11wb1b2Jg7R_vlMcfEJAUvNNGqKhA/exec') {
         await fetch(SHEET_URL, {
           method:'POST', mode:'no-cors',
           headers:{'Content-Type':'application/json'},
