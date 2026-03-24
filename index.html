@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REPLAY DENIM — Sign Up</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --black: #000000; --white: #ffffff; --lime: #d4f43a;
+    --grey: #1a1a1a; --text-dim: #888888;
+    --error: #ff4444; --success: #44cc88;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 999; opacity: 0.4;
+  }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; padding: 60px 24px 80px; text-align: center; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -20%; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(212,244,58,0.07) 0%, transparent 70%); pointer-events: none; }
+  .hero::after { content: ''; position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(212,244,58,0.4), transparent); animation: scan 4s linear infinite; pointer-events: none; }
+  @keyframes scan { 0% { top: -2px; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+  .logo-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(48px, 10vw, 120px); letter-spacing: -0.02em; line-height: 0.9; text-transform: uppercase; color: var(--white); margin-bottom: 48px; animation: fadeDown 0.8s ease both; }
+  .event-meta { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; animation: fadeUp 0.9s 0.2s ease both; }
+  .meta-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .meta-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+  .meta-value { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .divider-dot { width: 4px; height: 4px; background: var(--lime); border-radius: 50%; align-self: center; }
+  .cta-arrow { color: var(--lime); font-size: 24px; animation: bounce 2s infinite; }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(10px); } }
+
+  /* TICKER */
+  .ticker-wrap { overflow: hidden; border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; padding: 14px 0; white-space: nowrap; }
+  .ticker-inner { display: inline-block; animation: ticker 20s linear infinite; }
+  .ticker-inner span { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); padding: 0 40px; }
+  .ticker-inner span.accent { color: var(--lime); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* FORM SECTION */
+  .form-section { padding: 80px 24px 120px; max-width: 680px; margin: 0 auto; }
+  .section-eyebrow { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--lime); margin-bottom: 16px; }
+  .section-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(36px, 7vw, 72px); text-transform: uppercase; line-height: 0.95; margin-bottom: 48px; }
+
+  /* Sheets Banner */
+  .sheets-banner { background: #0a150a; border: 1px solid #1e2e1e; border-left: 3px solid var(--lime); padding: 16px 20px; margin-bottom: 40px; display: flex; gap: 12px; align-items: flex-start; }
+  .sheets-banner-icon { font-size: 18px; flex-shrink: 0; }
+  .sheets-banner-text { font-size: 12px; line-height: 1.8; color: #999; }
+  .sheets-banner-text strong { color: var(--lime); display: block; margin-bottom: 4px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .sheets-banner-text code { background: #111; color: var(--lime); padding: 1px 6px; font-size: 11px; font-family: monospace; }
+
+  /* Form */
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; animation: fadeUp 0.5s ease both; }
+  .form-group.full { grid-column: 1 / -1; }
+  .label-row { display: flex; justify-content: space-between; align-items: center; }
+  .form-group label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+  .optional-badge { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #444; border: 1px solid #2a2a2a; padding: 2px 7px; }
+
+  .input-wrap { position: relative; }
+  .input-wrap input { width: 100%; padding-right: 42px; }
+  .form-group input {
+    background: var(--grey); border: 1px solid #2a2a2a; color: var(--white);
+    padding: 16px 18px; font-family: 'Barlow', sans-serif; font-size: 15px;
+    outline: none; transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none; border-radius: 0; width: 100%;
+  }
+  .form-group input::placeholder { color: #444; }
+  .form-group input:focus { border-color: var(--lime); background: #111; }
+  .form-group input.valid { border-color: var(--success); }
+  .form-group input.err { border-color: var(--error); }
+  .form-group input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) sepia(1) saturate(5) hue-rotate(50deg); opacity: 0.6; }
+
+  .field-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); font-size: 13px; pointer-events: none; opacity: 0; transition: opacity 0.2s; font-weight: 700; }
+  .field-icon.show { opacity: 1; }
+  .field-icon.ok { color: var(--success); }
+  .field-icon.bad { color: var(--error); }
+
+  /* IG rules */
+  .ig-rules { display: flex; flex-direction: column; gap: 5px; }
+  .ig-rule { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text-dim); transition: color 0.2s; }
+  .ig-rule .dot { width: 5px; height: 5px; border-radius: 50%; background: #333; flex-shrink: 0; transition: background 0.2s; }
+  .ig-rule.pass { color: var(--success); } .ig-rule.pass .dot { background: var(--success); }
+  .ig-rule.fail { color: var(--error); } .ig-rule.fail .dot { background: var(--error); }
+
+  .error-msg { font-size: 11px; color: var(--error); display: none; }
+  .error-msg.show { display: block; }
+  .age-note { grid-column: 1 / -1; font-size: 11px; color: var(--text-dim); margin-top: -4px; }
+
+  /* Submit */
+  .submit-wrap { grid-column: 1 / -1; margin-top: 8px; }
+  .btn-submit { width: 100%; background: var(--lime); color: var(--black); border: none; padding: 20px 32px; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s; }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(212,244,58,0.25); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn-inner { display: flex; align-items: center; justify-content: center; gap: 12px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.3); border-top-color: var(--black); border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+  .btn-submit.loading .spinner { display: block; }
+  .btn-submit.loading .btn-label { opacity: 0.6; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.92); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.4s; }
+  .modal-overlay.show { opacity: 1; pointer-events: all; }
+  .modal { background: var(--grey); border: 1px solid #2a2a2a; max-width: 520px; width: 100%; padding: 56px 48px; text-align: center; transform: translateY(30px); transition: transform 0.4s; }
+  .modal-overlay.show .modal { transform: translateY(0); }
+  .modal-star { font-size: 40px; color: var(--lime); display: block; margin-bottom: 24px; animation: spinSlow 8s linear infinite; }
+  @keyframes spinSlow { to { transform: rotate(360deg); } }
+  .modal-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 48px; text-transform: uppercase; line-height: 0.95; margin-bottom: 16px; }
+  .modal-name { color: var(--lime); }
+  .modal-body { color: var(--text-dim); font-size: 14px; line-height: 1.7; margin-bottom: 32px; }
+  .modal-reminders { background: #111; border: 1px solid #222; padding: 20px 24px; text-align: left; margin-bottom: 32px; }
+  .modal-reminders-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lime); margin-bottom: 12px; }
+  .reminder-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1e1e1e; font-size: 12px; }
+  .reminder-item:last-child { border-bottom: none; }
+  .reminder-item .date { color: var(--text-dim); }
+  .btn-close { background: transparent; border: 1px solid #333; color: var(--text-dim); padding: 12px 32px; font-family: 'Barlow', sans-serif; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .btn-close:hover { border-color: var(--white); color: var(--white); }
+
+  /* FOOTER */
+  footer { border-top: 1px solid #1a1a1a; padding: 32px 24px; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; gap: 16px; flex-wrap: wrap; }
+  .footer-brand { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 18px; letter-spacing: 0.05em; }
+  .footer-collab { font-size: 11px; color: var(--text-dim); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: none; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  .form-group:nth-child(1){animation-delay:0.1s} .form-group:nth-child(2){animation-delay:0.15s}
+  .form-group:nth-child(3){animation-delay:0.2s} .form-group:nth-child(4){animation-delay:0.25s}
+  .form-group:nth-child(5){animation-delay:0.3s} .form-group:nth-child(6){animation-delay:0.35s}
+  .form-group:nth-child(7){animation-delay:0.4s} .form-group:nth-child(8){animation-delay:0.45s}
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full, .submit-wrap { grid-column: 1; }
+    .modal { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="logo-text">REPLAY<br>DENIM</div>
+  <div class="event-meta">
+    <div class="meta-item"><span class="meta-label">Date</span><span class="meta-value">12.05.2026</span></div>
+    <div class="divider-dot"></div>
+    <div class="meta-item"><span class="meta-label">Time</span><span class="meta-value">19:00 – 22:00</span></div>
+    <div class="divider-dot"></div>
+    <div class="meta-item"><span class="meta-label">Location</span><span class="meta-value">Zalando Experience Hub</span></div>
+    <div class="divider-dot"></div>
+    <div class="meta-item"><span class="meta-label">Capacity</span><span class="meta-value">200</span></div>
+  </div>
+  <div class="cta-arrow">↓</div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span>Live · Benno!</span><span class="accent">✦</span><span>DJ · Medussar</span><span class="accent">✦</span>
+    <span>Airbrush Tattoos</span><span class="accent">✦</span><span>Merch Giveaways</span><span class="accent">✦</span>
+    <span>Exclusive Discounts</span><span class="accent">✦</span><span>Replay Inc × Zalando</span><span class="accent">✦</span>
+    <span>Live · Benno!</span><span class="accent">✦</span><span>DJ · Medussar</span><span class="accent">✦</span>
+    <span>Airbrush Tattoos</span><span class="accent">✦</span><span>Merch Giveaways</span><span class="accent">✦</span>
+    <span>Exclusive Discounts</span><span class="accent">✦</span><span>Replay Inc × Zalando</span><span class="accent">✦</span>
+  </div>
+</div>
+
+<section class="form-section">
+  <p class="section-eyebrow">Secure Your Spot</p>
+  <h2 class="section-title">Sign<br>Up.</h2>
+
+  <!-- ⬇ SETUP NOTICE — remove once URL is configured -->
+  <div class="sheets-banner" id="setupBanner" style="display:none">
+    <span class="sheets-banner-icon">📋</span>
+    <div class="sheets-banner-text">
+      <strong>Google Sheets — Setup Required</strong>
+      Open this file in a text editor, find <code>SHEET_URL</code> near the bottom, and replace it with your Google Apps Script Web App URL. Step-by-step instructions are in the page source.
+    </div>
+  </div>
+
+  <form id="signupForm" novalidate>
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <div class="input-wrap">
+          <input type="text" id="firstName" placeholder="First name" autocomplete="given-name">
+          <span class="field-icon" id="ic-firstName"></span>
+        </div>
+        <span class="error-msg" id="er-firstName">Required</span>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <div class="input-wrap">
+          <input type="text" id="lastName" placeholder="Last name" autocomplete="family-name">
+          <span class="field-icon" id="ic-lastName"></span>
+        </div>
+        <span class="error-msg" id="er-lastName">Required</span>
+      </div>
+
+      <div class="form-group full">
+        <label for="email">Email Address</label>
+        <div class="input-wrap">
+          <input type="email" id="email" placeholder="your@email.com" autocomplete="email">
+          <span class="field-icon" id="ic-email"></span>
+        </div>
+        <span class="error-msg" id="er-email">Enter a valid email address</span>
+      </div>
+
+      <div class="form-group full">
+        <label for="instagram">Instagram Handle</label>
+        <div class="input-wrap">
+          <input type="text" id="instagram" placeholder="@yourhandle" autocomplete="off" spellcheck="false">
+          <span class="field-icon" id="ic-instagram"></span>
+        </div>
+        <div class="ig-rules" id="igRules">
+          <div class="ig-rule" id="rule-length"><span class="dot"></span>1–30 characters</div>
+          <div class="ig-rule" id="rule-chars"><span class="dot"></span>Letters, numbers, underscores &amp; periods only</div>
+          <div class="ig-rule" id="rule-nodots"><span class="dot"></span>No consecutive dots or leading/trailing dots</div>
+        </div>
+        <span class="error-msg" id="er-instagram"></span>
+      </div>
+
+      <div class="form-group full">
+        <div class="label-row">
+          <label for="tiktok">TikTok Handle</label>
+          <span class="optional-badge">Optional</span>
+        </div>
+        <div class="input-wrap">
+          <input type="text" id="tiktok" placeholder="@yourhandle" autocomplete="off" spellcheck="false">
+          <span class="field-icon" id="ic-tiktok"></span>
+        </div>
+        <span class="error-msg" id="er-tiktok"></span>
+      </div>
+
+      <div class="form-group full">
+        <label for="dob">Date of Birth</label>
+        <div class="input-wrap">
+          <input type="date" id="dob">
+          <span class="field-icon" id="ic-dob"></span>
+        </div>
+        <span class="error-msg" id="er-dob">You must be 18 or older to attend</span>
+      </div>
+
+      <p class="age-note">Open to guests aged 18–30. Date of birth used for age verification only.</p>
+
+      <div class="submit-wrap">
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span class="btn-inner">
+            <span class="spinner"></span>
+            <span class="btn-label">Reserve My Place →</span>
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </form>
+</section>
+
+<footer>
+  <span class="footer-brand">REPLAY DENIM</span>
+  <span class="footer-collab">Replay Inc × Zalando · Berlin · 2026</span>
+</footer>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <span class="modal-star">✦</span>
+    <h3 class="modal-title">You're In,<br><span class="modal-name" id="confirmName"></span></h3>
+    <p class="modal-body">A confirmation has been sent to <strong id="confirmEmail"></strong>.<br>Get ready for a night of denim, music, and good vibes.</p>
+    <div class="modal-reminders">
+      <p class="modal-reminders-title">Your Reminders</p>
+      <div class="reminder-item"><span>Confirmation</span><span class="date">Today</span></div>
+      <div class="reminder-item"><span>2-Week Reminder</span><span class="date" id="r2w"></span></div>
+      <div class="reminder-item"><span>1-Week Reminder</span><span class="date" id="r1w"></span></div>
+      <div class="reminder-item"><span>48-Hour Reminder</span><span class="date" id="r2d"></span></div>
+      <div class="reminder-item"><span>Event Day</span><span class="date">12 May 2026</span></div>
+    </div>
+    <button class="btn-close" id="modalClose">Close</button>
+  </div>
+</div>
+
+<!--
+════════════════════════════════════════════════════════════════
+  GOOGLE SHEETS SETUP — 2-MINUTE GUIDE
+════════════════════════════════════════════════════════════════
+
+STEP 1  Go to sheets.google.com → create a new blank spreadsheet
+        Name it e.g. "Replay Denim Sign-Ups"
+
+STEP 2  In that spreadsheet: Extensions → Apps Script
+        Delete all existing code and paste this:
+
+─────────────────────────────────────────────────────────────
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data  = JSON.parse(e.postData.contents);
+
+  // Write headers on first submission
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow([
+      'Timestamp','First Name','Last Name',
+      'Email','Instagram','TikTok','Date of Birth'
+    ]);
+    sheet.getRange(1,1,1,7).setFontWeight('bold');
+  }
+
+  sheet.appendRow([
+    new Date().toLocaleString('de-DE'),
+    data.firstName, data.lastName, data.email,
+    data.instagram, data.tiktok || '', data.dob
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'ok' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+─────────────────────────────────────────────────────────────
+
+STEP 3  Click "Deploy" → "New deployment"
+        Type: Web App
+        Execute as: Me
+        Who has access: Anyone
+        → Click Deploy → Authorise → Copy the Web App URL
+
+STEP 4  Paste that URL below as the value of SHEET_URL
+        e.g. const SHEET_URL = 'https://script.google.com/macros/s/ABC.../exec';
+
+STEP 5  Delete or hide the setupBanner div above
+
+EXPORT  In Google Sheets → File → Download → Excel (.xlsx) anytime
+
+════════════════════════════════════════════════════════════════
+-->
+
+<script>
+  // ── PASTE YOUR WEB APP URL HERE ──────────────────────
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbz3XKbzOn0o-irgraawZZ3CYAfQ6Rj2EsegiZfuKWbSsLEeGTrT0jPWmfuORqj1124sxA/exec';
+  // ─────────────────────────────────────────────────────
+
+  // Hide setup banner if URL is configured
+  if (SHEET_URL !== 'https://script.google.com/macros/s/AKfycbz3XKbzOn0o-irgraawZZ3CYAfQ6Rj2EsegiZfuKWbSsLEeGTrT0jPWmfuORqj1124sxA/exec') {
+    document.getElementById('setupBanner').style.display = 'none';
+  }
+
+  // Reminder dates
+  const EVENT = new Date('2026-05-12');
+  const fmt = d => d.toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+  const addD = (d,n) => { const r=new Date(d); r.setDate(r.getDate()+n); return r; };
+  document.getElementById('r2w').textContent = fmt(addD(EVENT,-14));
+  document.getElementById('r1w').textContent = fmt(addD(EVENT,-7));
+  document.getElementById('r2d').textContent = fmt(addD(EVENT,-2));
+
+  // ── HELPERS ───────────────────────────────────────────
+  const $ = id => document.getElementById(id);
+  function setIcon(f, state) {
+    const el = $('ic-'+f);
+    el.textContent = state==='ok' ? '✓' : state==='bad' ? '✕' : '';
+    el.className = 'field-icon' + (state ? ' show '+state : '');
+  }
+  function setField(f, state) {
+    const el = $(f); el.classList.remove('valid','err');
+    if (state==='ok') el.classList.add('valid');
+    if (state==='bad') el.classList.add('err');
+  }
+  function showErr(f, msg) { const e=$('er-'+f); if(msg) e.textContent=msg; e.classList.add('show'); }
+  function clearErr(f) { $('er-'+f).classList.remove('show'); }
+  function markOk(f) { setField(f,'ok'); setIcon(f,'ok'); clearErr(f); }
+  function markBad(f, msg) { setField(f,'bad'); setIcon(f,'bad'); showErr(f,msg); }
+  function markClear(f) { setField(f,''); setIcon(f,''); clearErr(f); }
+
+  // ── INSTAGRAM ─────────────────────────────────────────
+  function igCheck(raw) {
+    const h = raw.replace(/^@/,'');
+    return {
+      length: h.length>=1 && h.length<=30,
+      chars:  /^[a-zA-Z0-9._]+$/.test(h) && h.length>0,
+      nodots: !/\.\./.test(h) && !h.startsWith('.') && !h.endsWith('.') && h.length>0
+    };
+  }
+  function renderIgRules(res) {
+    ['length','chars','nodots'].forEach(k => {
+      const el=$('rule-'+k); el.classList.remove('pass','fail');
+      if (res[k]!==undefined) el.classList.add(res[k]?'pass':'fail');
+    });
+  }
+
+  $('instagram').addEventListener('input', function() {
+    const v = this.value.trim();
+    if (!v || v==='@') { renderIgRules({}); markClear('instagram'); return; }
+    const r = igCheck(v);
+    renderIgRules(r);
+    const valid = r.length && r.chars && r.nodots;
+    valid ? markOk('instagram') : markBad('instagram', 'Handle doesn\'t meet Instagram format rules');
+  });
+
+  // ── TIKTOK ────────────────────────────────────────────
+  function ttCheck(raw) {
+    const h = raw.replace(/^@/,'');
+    return h.length===0 || /^[a-zA-Z0-9._]{1,24}$/.test(h);
+  }
+  $('tiktok').addEventListener('input', function() {
+    const v = this.value.trim();
+    if (!v || v==='@') { markClear('tiktok'); return; }
+    ttCheck(v) ? markOk('tiktok') : markBad('tiktok','1–24 chars, letters, numbers, _ and . only');
+  });
+
+  // ── EMAIL ─────────────────────────────────────────────
+  $('email').addEventListener('blur', function() {
+    const v = this.value.trim();
+    if (!v) return;
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? markOk('email') : markBad('email','Enter a valid email address');
+  });
+
+  // ── DOB ───────────────────────────────────────────────
+  function ageOk(dob) {
+    if (!dob) return false;
+    const b=new Date(dob), t=new Date();
+    const age = t.getFullYear()-b.getFullYear() - (t < new Date(t.getFullYear(),b.getMonth(),b.getDate()) ? 1:0);
+    return age>=18;
+  }
+  $('dob').addEventListener('change', function() {
+    const ok = ageOk(this.value);
+    ok ? markOk('dob') : (this.value ? markBad('dob','You must be 18 or older to attend') : markClear('dob'));
+  });
+
+  // ── SUBMIT ────────────────────────────────────────────
+  $('signupForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const firstName = $('firstName').value.trim();
+    const lastName  = $('lastName').value.trim();
+    const email     = $('email').value.trim();
+    const instagram = $('instagram').value.trim();
+    const tiktok    = $('tiktok').value.trim();
+    const dob       = $('dob').value;
+    let ok = true;
+
+    if (!firstName)                                           { markBad('firstName','Required'); ok=false; } else markOk('firstName');
+    if (!lastName)                                            { markBad('lastName','Required'); ok=false; } else markOk('lastName');
+    if (!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))  { markBad('email','Enter a valid email address'); ok=false; } else markOk('email');
+
+    const igR = igCheck(instagram);
+    renderIgRules(igR);
+    if (!instagram || !(igR.length&&igR.chars&&igR.nodots))  { markBad('instagram', !instagram?'Required':'Handle doesn\'t meet Instagram format rules'); ok=false; } else markOk('instagram');
+
+    if (tiktok && !ttCheck(tiktok))                          { markBad('tiktok','1–24 chars, letters, numbers, _ and . only'); ok=false; }
+
+    if (!ageOk(dob))                                         { markBad('dob','You must be 18 or older to attend'); ok=false; } else markOk('dob');
+
+    if (!ok) return;
+
+    // Submit
+    const btn = $('submitBtn');
+    btn.disabled = true; btn.classList.add('loading');
+
+    try {
+      if (SHEET_URL && SHEET_URL !== 'https://script.google.com/macros/s/AKfycbz3XKbzOn0o-irgraawZZ3CYAfQ6Rj2EsegiZfuKWbSsLEeGTrT0jPWmfuORqj1124sxA/exec') {
+        await fetch(SHEET_URL, {
+          method:'POST', mode:'no-cors',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ firstName, lastName, email, instagram, tiktok, dob })
+        });
+      } else {
+        console.table({ firstName, lastName, email, instagram, tiktok, dob });
+        await new Promise(r=>setTimeout(r,700));
+      }
+    } catch(err) { console.error(err); }
+
+    btn.disabled=false; btn.classList.remove('loading');
+
+    // Confirm modal
+    $('confirmName').textContent  = firstName;
+    $('confirmEmail').textContent = email;
+    $('modalOverlay').classList.add('show');
+
+    this.reset();
+    ['firstName','lastName','email','instagram','tiktok','dob'].forEach(f => markClear(f));
+    renderIgRules({});
+  });
+
+  $('modalClose').addEventListener('click', ()=>$('modalOverlay').classList.remove('show'));
+  $('modalOverlay').addEventListener('click', e=>{ if(e.target===$('modalOverlay')) $('modalOverlay').classList.remove('show'); });
+</script>
+</body>
+</html>
